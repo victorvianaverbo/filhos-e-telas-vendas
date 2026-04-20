@@ -135,7 +135,6 @@ body {
 }
 
 .hero__editorial {
-  animation: heroRise .9s .1s var(--ease-out) both;
   max-width: 640px;
 }
 
@@ -224,7 +223,7 @@ body {
   background: var(--sage);
 }
 
-.hero__offer { animation: heroRise .9s .3s var(--ease-out) both; position: relative; }
+.hero__offer { position: relative; }
 
 .offer-card {
   position: relative;
@@ -651,9 +650,11 @@ body {
 .mesh-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(40px);
   opacity: .5;
-  will-change: transform;
+}
+@media (min-width: 900px) {
+  .mesh-blob { filter: blur(90px); will-change: transform; }
 }
 .mesh-blob--1 { width: 500px; height: 500px; background: var(--teal-mid); top: -10%; left: -10%; animation: blobDrift 30s ease-in-out infinite alternate; }
 .mesh-blob--2 { width: 400px; height: 400px; background: var(--teal-light); bottom: -15%; right: -5%; animation: blobDrift 32s ease-in-out infinite alternate-reverse; }
