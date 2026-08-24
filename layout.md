@@ -496,7 +496,7 @@ Implementado conforme [copy.md](copy.md) Dobra 1. Incluir tag "DESAFIO DE 5 DIAS
 ### Conteúdo
 - **Imagem:** mockup do produto (ebook + aula em destaque).
 - **Preço anterior:** `De ~~R$ 436,00~~ por:`
-- **Preço principal:** `12x de R$ 6,89`
+- **Preço principal:** `9x de R$ 8,80`
 - **Preço à vista:** `ou R$ 67,00 à vista`
 - **CTA:** `QUERO RECONQUISTAR MEU FILHO AGORA`
 - **Selos:** `🔒 Compra Segura · ✅ Satisfação Garantida · 🔐 Privacidade Protegida`

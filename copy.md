@@ -160,7 +160,7 @@
 
 - **Imagem:** [Mockup do produto — ebook + aula em destaque]
 - **Preço anterior:** De ~~R$ 436,00~~ por:
-- **Preço principal:** 12x de R$ 6,89
+- **Preço principal:** 9x de R$ 8,80
 - **Preço à vista:** ou R$ 67,00 à vista
 - **CTA:** QUERO RECONQUISTAR MEU FILHO AGORA
 - **Selos de segurança:** 🔒 Compra Segura · ✅ Satisfação Garantida · 🔐 Privacidade Protegida
@@ -206,7 +206,7 @@ O Desafio de 5 Dias: Meus Filhos Sem Tela não é um achismo. É o resultado de 
 
 - **Imagem:** [Mockup do produto — ebook + aula em destaque]
 - **Preço anterior:** De ~~R$ 436,00~~ por:
-- **Preço principal:** 12x de R$ 6,89
+- **Preço principal:** 9x de R$ 8,80
 - **Preço à vista:** ou R$ 67,00 à vista
 - **CTA:** QUERO RECONQUISTAR MEU FILHO AGORA
 - **Selos de segurança:** 🔒 Compra Segura · ✅ Satisfação Garantida · 🔐 Privacidade Protegida

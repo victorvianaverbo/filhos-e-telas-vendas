@@ -105,19 +105,8 @@
   }
 
 
-  /* ── 5. Timeline + ativação dos passos (Dobra 5) ───────────── */
-  const stepsList = document.querySelector('.steps__list');
+  /* ── 5. Ativação dos passos (Dobra 5) ───────────── */
   const steps = document.querySelectorAll('.step');
-
-  if (stepsList) {
-    const stepsObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        stepsList.classList.add('is-drawn');
-        stepsObserver.disconnect();
-      }
-    }, { threshold: 0.1 });
-    stepsObserver.observe(stepsList);
-  }
 
   const stepActivator = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -198,4 +187,172 @@
     }, { threshold: 0.3 });
     footerObserver.observe(footer);
   }
+
+
+  /* ── 9. Tracking (Meta Pixel) ─────────────────────────────── */
+  const PRODUTO = { content_name: 'Desafio de 5 Dias - Meus Filhos Sem Tela', content_ids: ['N105757944R'], content_type: 'product', value: 67, currency: 'BRL' };
+
+  const track = (evento, params) => {
+    if (typeof window.fbq === 'function') window.fbq('track', evento, Object.assign({}, PRODUTO, params || {}));
+  };
+
+  /* ViewContent uma vez, quando a oferta entra na tela */
+  const ofertaEl = document.getElementById('oferta');
+  if (ofertaEl) {
+    const ofertaObserver = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) {
+        track('ViewContent');
+        ofertaObserver.disconnect();
+      }
+    }, { threshold: 0.3 });
+    ofertaObserver.observe(ofertaEl);
+  }
+
+
+  /* ── 10. Captura de lead + redirect Hotmart ───────────────── */
+  const HOTMART_URL = 'https://pay.hotmart.com/N105757944R?off=tepc96x5';
+
+  /* URL /exec do Apps Script (leads-planilha.gs) publicado como app da web,
+     acesso "Qualquer pessoa". Vazio = não grava, só redireciona. */
+  const WEBHOOK_PLANILHA = '';
+
+  const modal = document.getElementById('lead-modal');
+  const form = document.getElementById('lead-form');
+
+  const openModal = (origem) => {
+    if (!modal) return;
+    modal.dataset.origem = origem || 'desconhecido';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lead-modal-open');
+    setTimeout(() => form?.querySelector('input[name="nome"]')?.focus(), 100);
+  };
+  const closeModal = () => {
+    if (!modal) return;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lead-modal-open');
+  };
+
+  /* Sem JS os CTAs são links diretos para a Hotmart; com JS abrem o popup */
+  document.querySelectorAll('[data-checkout-cta]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      track('InitiateCheckout', { origem: el.dataset.ctaOrigem || '' });
+      openModal(el.dataset.ctaOrigem);
+    });
+  });
+
+  document.querySelectorAll('[data-lead-close]').forEach((el) => {
+    el.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.getAttribute('aria-hidden') === 'false') closeModal();
+  });
+
+  const maskPhone = (v) => {
+    const d = v.replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 2) return d.length ? `(${d}` : '';
+    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  };
+
+  const phoneInput = form?.querySelector('input[name="telefone"]');
+  phoneInput?.addEventListener('input', (e) => {
+    e.target.value = maskPhone(e.target.value);
+  });
+
+  /* UTMs + fbclid: lê da URL e guarda na sessão, para sobreviver a
+     recarregamento sem query string */
+  const TRACK_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'];
+  const getTracking = () => {
+    const p = new URLSearchParams(window.location.search);
+    let saved = {};
+    try { saved = JSON.parse(sessionStorage.getItem('lead_tracking') || '{}'); } catch (_) {}
+    const out = {};
+    TRACK_KEYS.forEach((k) => { out[k] = p.get(k) || saved[k] || ''; });
+    try { sessionStorage.setItem('lead_tracking', JSON.stringify(out)); } catch (_) {}
+    return out;
+  };
+  const tracking = getTracking();
+
+  /* Pré-preenche o checkout (parâmetros aceitos pela Hotmart: name,
+     phoneac, phonenumber) e repassa os UTMs para o relatório de vendas */
+  const buildCheckoutURL = (nome, phoneDigits) => {
+    const url = new URL(HOTMART_URL);
+    url.searchParams.set('name', nome);
+    url.searchParams.set('phoneac', phoneDigits.slice(0, 2));
+    url.searchParams.set('phonenumber', phoneDigits.slice(2));
+    TRACK_KEYS.forEach((k) => { if (tracking[k] && k !== 'fbclid') url.searchParams.set(k, tracking[k]); });
+    return url.toString();
+  };
+
+  /* text/plain evita o preflight de CORS (o Apps Script não responde a ele);
+     sendBeacon entrega mesmo com a página saindo para o checkout */
+  const saveLead = (lead) => {
+    if (!WEBHOOK_PLANILHA) return;
+    const corpo = JSON.stringify(lead);
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(WEBHOOK_PLANILHA, new Blob([corpo], { type: 'text/plain' }))) return;
+    } catch (_) { /* segue para o fetch */ }
+    if (window.fetch) {
+      fetch(WEBHOOK_PLANILHA, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: corpo,
+      }).catch(() => {});
+    }
+  };
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nome = form.elements.nome.value.trim().replace(/\s+/g, ' ');
+    const telefone = form.elements.telefone.value.trim();
+    const phoneDigits = telefone.replace(/\D/g, '');
+
+    let invalid = false;
+    if (nome.length < 2) {
+      form.elements.nome.setAttribute('aria-invalid', 'true');
+      invalid = true;
+    } else form.elements.nome.removeAttribute('aria-invalid');
+
+    if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+      form.elements.telefone.setAttribute('aria-invalid', 'true');
+      invalid = true;
+    } else form.elements.telefone.removeAttribute('aria-invalid');
+
+    if (invalid) {
+      form.querySelector('[aria-invalid="true"]')?.focus();
+      return;
+    }
+
+    const submitBtn = form.querySelector('.lead-form__submit');
+    const textSpan = form.querySelector('.lead-form__submit-text');
+    const originalText = textSpan.textContent;
+    submitBtn.disabled = true;
+    textSpan.textContent = 'Redirecionando...';
+
+    const origem = modal?.dataset.origem || '';
+
+    track('Lead', { origem });
+
+    saveLead(Object.assign({
+      nome,
+      telefone,
+      telefone_digitos: phoneDigits,
+      origem,
+      pagina: 'vendas',
+      url: window.location.href,
+      referencia: document.referrer || '',
+      enviado_em: new Date().toISOString(),
+    }, tracking));
+
+    window.location.href = buildCheckoutURL(nome, phoneDigits);
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      textSpan.textContent = originalText;
+    }, 4000);
+  });
 })();

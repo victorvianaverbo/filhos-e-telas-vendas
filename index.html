@@ -4,17 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Desafio de 5 Dias — Meus Filhos Sem Tela | Instituto Verstehen</title>
-  <meta name="description" content="Descubra como acabar com as crises de retirada do celular em 5 dias. Protocolo médico do Instituto Verstehen, baseado em neurociência real.">
-  <link rel="icon" type="image/png" href="assets/perfil-whatsapp-v1-icone.png">
-  <link rel="apple-touch-icon" href="assets/perfil-whatsapp-v2-nome.png">
+  <meta name="description" content="Protocolo médico do Instituto Verstehen que auxilia famílias na condução das crises de retirada de tela e no processo de reconectar com seus filhos.">
+  <link rel="icon" type="image/png" href="assets/favicon-64.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-180.png">
   <meta property="og:title" content="Desafio de 5 Dias — Meus Filhos Sem Tela">
-  <meta property="og:description" content="Protocolo médico do Instituto Verstehen para acabar com as crises de retirada do celular em 5 dias.">
-  <meta property="og:image" content="assets/banner-whatsapp.png">
+  <meta property="og:description" content="O protocolo médico que auxilia na condução das crises de retirada de tela e te apoia no processo de reconectar com seu filho.">
+  <meta property="og:image" content="assets/og-image.png">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/mockup-produto.webp" fetchpriority="high">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="dns-prefetch" href="//connect.facebook.net">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Meta Pixel (carregado na 1ª interação ou 8 s após o load, para não pesar o LCP) -->
+  <script>
+    window.fbq = window.fbq || function(){ (window.fbq.q = window.fbq.q || []).push(arguments); };
+    window.fbq.queue = window.fbq.q = window.fbq.q || [];
+    (function () {
+      var carregar = function () {
+        !function(f,b,e,v,n,t,s){if(f.fbq&&f.fbq.loaded)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=(f.fbq&&f.fbq.q)||[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1384351202573061');
+        fbq('track', 'PageView');
+      };
+      /* carrega na primeira interação (rolagem, toque, tecla, mouse) ou
+         8 s depois do load: fora da janela do LCP e do PageSpeed */
+      var feito = false;
+      var disparar = function () {
+        if (feito) return;
+        feito = true;
+        eventos.forEach(function (ev) { window.removeEventListener(ev, disparar, { passive: true }); });
+        carregar();
+      };
+      var eventos = ['scroll', 'touchstart', 'keydown', 'mousemove', 'click'];
+      eventos.forEach(function (ev) { window.addEventListener(ev, disparar, { passive: true, once: true }); });
+      window.addEventListener('load', function () { setTimeout(disparar, 8000); });
+    })();
+  </script>
+  <noscript><img height="1" width="1" style="display:none" alt=""
+    src="https://www.facebook.com/tr?id=1384351202573061&ev=PageView&noscript=1"></noscript>
 </head>
 <body>
 
@@ -25,7 +60,7 @@
 
     <div class="hero__inner">
       <div class="hero__editorial">
-        <img src="/.netlify/images?url=/assets/perfil-whatsapp-v1-icone.png&w=144&h=144&fit=contain&q=80" alt="Instituto Verstehen" class="hero__brand" width="72" height="72" loading="eager" fetchpriority="high">
+        <img src="assets/favicon-64.png" alt="Instituto Verstehen" class="hero__brand" width="72" height="72" loading="eager" fetchpriority="high">
 
         <span class="hero__eyebrow" aria-label="Campanha Desafio de 5 dias">
           <span class="hero__eyebrow-dot"></span>
@@ -38,7 +73,7 @@
         </h1>
 
         <p class="hero__lede">
-          Descubra como acabar com as crises de retirada do celular e voltar a ter paz em casa em <strong>5 dias</strong> — mesmo que seu filho reaja com agressividade quando você tira a tela.
+          O <strong>protocolo médico</strong> que auxilia na condução das crises de retirada de tela — e te apoia no processo de reconectar com seu filho.
         </p>
 
         <ul class="hero__bullets">
@@ -51,14 +86,8 @@
 
       <aside class="hero__offer" aria-label="Oferta em destaque">
         <div class="offer-card">
-          <div class="offer-card__mockup" aria-hidden="true">
-            <span class="offer-card__mockup-tag">Ebook + Aula</span>
-            <div class="offer-card__mockup-shape">
-              <div class="offer-card__mockup-book"></div>
-              <div class="offer-card__mockup-play">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
+          <div class="offer-card__mockup">
+            <img src="assets/mockup-produto.webp" alt="Ebook Filhos &amp; Telas e aula do Dr. Adriano" class="offer-card__mockup-img" width="521" height="327" loading="eager" fetchpriority="high">
           </div>
 
           <ul class="offer-card__seals">
@@ -67,7 +96,7 @@
             <li><span class="seal-check">✓</span> Acesso liberado na hora</li>
           </ul>
 
-          <a href="#oferta" class="offer-card__cta">
+          <a href="https://pay.hotmart.com/N105757944R?off=tepc96x5" rel="noopener" class="offer-card__cta" data-checkout-cta data-cta-origem="hero">
             <span>Quero reconquistar meu filho agora</span>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
@@ -174,28 +203,11 @@
       </h2>
 
       <p class="solution__lede" data-reveal data-reveal-delay="700">
-        Esse é o protocolo médico que vai te ajudar a reconquistar o controle das telas — ainda esta semana!
+        Esse é o protocolo médico que vai te ajudar a reconquistar o controle das telas.
       </p>
 
       <div class="solution__mockup-pair" data-reveal data-reveal-delay="900">
-        <div class="mockup-book" aria-hidden="true">
-          <div class="mockup-book__cover">
-            <span class="mockup-book__label">FILHOS<br>& TELAS</span>
-            <span class="mockup-book__author">Dr. Adriano Alves</span>
-          </div>
-        </div>
-        <div class="mockup-divider" aria-hidden="true"></div>
-        <div class="mockup-video" aria-hidden="true">
-          <div class="mockup-video__screen">
-            <div class="mockup-video__play">
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="mockup-video__timeline">
-              <div class="mockup-video__progress"></div>
-            </div>
-          </div>
-          <span class="mockup-video__label">Aula do Dr. Adriano</span>
-        </div>
+        <img src="assets/mockup-produto.webp" alt="Ebook Filhos &amp; Telas e aula do Dr. Adriano" class="solution__mockup-img" width="521" height="327" loading="lazy">
       </div>
 
       <ul class="solution__seals">
@@ -265,7 +277,7 @@
             <span class="step__label">Passo 04</span>
             <p class="step__text">
               <span class="step__emoji" aria-hidden="true">🎉</span>
-              Pronto! Em 5 dias, veja seu filho responder diferente quando você pedir para desligar a tela.
+              Pronto! Aplique nos próximos 5 dias. Essa metodologia te ajudará no processo.
             </p>
           </div>
         </li>
@@ -346,7 +358,7 @@
             <path d="M14 20h12M14 26h8"/>
           </svg>
           <h3 class="item__name">Técnicas de Mediação de Crise</h3>
-          <p class="item__desc">Estratégias de Comunicação Não Violenta para o momento exato em que você tira a tela e ele explode. Sem gritos, sem culpa, sem briga.</p>
+          <p class="item__desc">Ferramentas de apoio para conduzir os momentos de retirada de tela com mais equilíbrio e menos conflito.</p>
         </article>
       </div>
 
@@ -441,7 +453,7 @@
             <span class="check-circle" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
             </span>
-            Quer impor limites de tela com autoridade — sem se sentir a vilã da história.
+            Busca orientação para estabelecer limites de tela de forma estruturada.
           </li>
           <li data-reveal data-reveal-delay="750">
             <span class="check-circle" aria-hidden="true">
@@ -530,20 +542,11 @@
     </div>
 
     <div class="offer__inner">
-      <div class="offer__mockup" data-reveal aria-hidden="true">
-        <div class="mockup-book mockup-book--large">
-          <div class="mockup-book__cover">
-            <span class="mockup-book__label">FILHOS<br>& TELAS</span>
-            <span class="mockup-book__author">Dr. Adriano Alves</span>
-          </div>
-        </div>
-        <div class="mockup-video mockup-video--float">
-          <div class="mockup-video__screen">
-            <div class="mockup-video__play">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-        </div>
+      <div class="offer__mockup" data-reveal>
+        <picture>
+          <source media="(max-width: 720px)" srcset="assets/mockup-oferta-mobile.webp">
+          <img src="assets/mockup-oferta.webp" alt="Ebook Filhos &amp; Telas com aulas do Dr. Adriano" class="offer__mockup-img" width="1377" height="808" loading="lazy">
+        </picture>
       </div>
 
       <p class="offer__old-price" data-reveal data-reveal-delay="200">
@@ -551,15 +554,15 @@
       </p>
 
       <div class="offer__price" data-reveal data-reveal-delay="400">
-        <span class="offer__price-parcels">12x de</span>
-        <span class="offer__price-main">R$ 6,89</span>
+        <span class="offer__price-parcels">9x de</span>
+        <span class="offer__price-main">R$ 8,80</span>
       </div>
 
       <p class="offer__cash" data-reveal data-reveal-delay="550">
         ou <strong>R$ 67,00</strong> à vista
       </p>
 
-      <a href="#" class="offer__cta" data-reveal data-reveal-delay="700">
+      <a href="https://pay.hotmart.com/N105757944R?off=tepc96x5" rel="noopener" class="offer__cta" data-reveal data-reveal-delay="700" data-checkout-cta data-cta-origem="oferta">
         <span class="offer__cta-border" aria-hidden="true"></span>
         <span class="offer__cta-text">Quero reconquistar meu filho agora</span>
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -612,7 +615,7 @@
           <ul class="contrast__list">
             <li>Seguir o Protocolo Verstehen passo a passo — sem improvisação.</li>
             <li>Aplicar o Método do Semáforo e o Pacto de Autonomia ainda esta semana.</li>
-            <li>Ver seu filho responder diferente quando você pedir para desligar a tela.</li>
+            <li>Ter uma ferramenta é de extrema utilidade no processo de educação digital do seu filho.</li>
             <li>Voltar a se sentir no controle — e reconectar com o filho que você ama.</li>
           </ul>
         </article>
@@ -645,8 +648,12 @@
 
       <figure class="authority__portrait" data-reveal>
         <div class="authority__frame">
-          <img src="/.netlify/images?url=/assets/banner-whatsapp.png&w=1120&q=80" alt="Instituto Verstehen — Filhos e Telas — Orientando pais no mundo digital" width="1120" height="630" loading="lazy">
+          <img src="assets/dr-adriano-bio.webp" srcset="assets/dr-adriano-bio-mobile.webp 420w, assets/dr-adriano-bio.webp 760w" sizes="(max-width: 720px) 88vw, 380px" alt="Dr. Adriano Alves — Médico Psiquiatra do Instituto Verstehen" width="461" height="713" loading="lazy">
         </div>
+        <figcaption class="authority__caption">
+          <strong>Dr. Adriano Alves</strong>
+          <span>Médico Psiquiatra · CRM-DF 22009 · RQE 14034</span>
+        </figcaption>
       </figure>
     </div>
 
@@ -662,58 +669,45 @@
 
   <!-- ═══════════════ DOBRA 12 · CTA FINAL ═══════════════ -->
   <section class="offer offer--final" id="oferta-final">
-    <div class="offer__particles" aria-hidden="true">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
+    <div class="offer__grain" aria-hidden="true"></div>
 
     <div class="offer__inner offer__inner--final">
-      <span class="offer__urgency" data-reveal>Última chance de começar ainda esta semana</span>
+      <span class="offer__kicker" data-reveal>Última chance de começar ainda esta semana</span>
 
-      <div class="offer__final-split">
-        <div class="offer__mockup offer__mockup--side" data-reveal aria-hidden="true">
-          <div class="mockup-book mockup-book--large">
-            <div class="mockup-book__cover">
-              <span class="mockup-book__label">FILHOS<br>& TELAS</span>
-              <span class="mockup-book__author">Dr. Adriano Alves</span>
-            </div>
-          </div>
-          <div class="mockup-video mockup-video--float">
-            <div class="mockup-video__screen">
-              <div class="mockup-video__play">
-                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-          </div>
+      <div class="offer__final-grid">
+        <div class="offer__mockup offer__mockup--final" data-reveal data-reveal-delay="150">
+          <picture>
+            <source media="(max-width: 720px)" srcset="assets/mockup-oferta-mobile.webp">
+            <img src="assets/mockup-oferta.webp" alt="Ebook Filhos &amp; Telas com aulas do Dr. Adriano" class="offer__mockup-img" width="1377" height="808" loading="lazy">
+          </picture>
         </div>
 
-        <div class="offer__final-content">
-          <p class="offer__old-price" data-reveal data-reveal-delay="200">
+        <div class="offer__final-price">
+          <p class="offer__old-price" data-reveal data-reveal-delay="250">
             De <span class="offer__old-strike">R$ 436,00</span> por:
           </p>
 
-          <div class="offer__price" data-reveal data-reveal-delay="400">
-            <span class="offer__price-parcels">12x de</span>
-            <span class="offer__price-main">R$ 6,89</span>
+          <div class="offer__price" data-reveal data-reveal-delay="350">
+            <span class="offer__price-parcels">9x de</span>
+            <span class="offer__price-main">R$ 8,80</span>
           </div>
 
-          <p class="offer__cash" data-reveal data-reveal-delay="550">
+          <p class="offer__cash" data-reveal data-reveal-delay="450">
             ou <strong>R$ 67,00</strong> à vista
           </p>
-
-          <a href="#" class="offer__cta offer__cta--pulse" data-reveal data-reveal-delay="700">
-            <span class="offer__cta-border" aria-hidden="true"></span>
-            <span class="offer__cta-text">Quero reconquistar meu filho agora</span>
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-
-          <ul class="offer__seals" data-reveal data-reveal-delay="900">
-            <li><span aria-hidden="true">🔒</span> Compra Segura</li>
-            <li><span aria-hidden="true">✅</span> Satisfação Garantida</li>
-            <li><span aria-hidden="true">🔐</span> Privacidade Protegida</li>
-          </ul>
         </div>
       </div>
+
+      <a href="https://pay.hotmart.com/N105757944R?off=tepc96x5" rel="noopener" class="offer__cta offer__cta--final" data-reveal data-reveal-delay="550" data-checkout-cta data-cta-origem="oferta-final">
+        <span class="offer__cta-text">Quero reconquistar meu filho agora</span>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+
+      <ul class="offer__seals" data-reveal data-reveal-delay="700">
+        <li><span aria-hidden="true">🔒</span> Compra Segura</li>
+        <li><span aria-hidden="true">✅</span> Satisfação Garantida</li>
+        <li><span aria-hidden="true">🔐</span> Privacidade Protegida</li>
+      </ul>
     </div>
   </section>
 
@@ -787,7 +781,7 @@
               <span class="faq__icon-v"></span>
             </span>
           </summary>
-          <div class="faq__answer-wrap"><p class="faq__answer">Sim. O Protocolo Verstehen foi desenvolvido especificamente para crianças que reagem com agressividade e choro na retirada da tela — a chamada Síndrome de Abstinência Digital. Quanto mais resistente, mais o protocolo faz sentido.</p></div>
+          <div class="faq__answer-wrap"><p class="faq__answer">O Protocolo Verstehen foi desenvolvido para auxiliar famílias que enfrentam alta resistência na retirada de tela, a chamada Síndrome de Abstinência Digital — oferecendo ferramentas estruturadas para conduzir esse processo com mais segurança.</p></div>
         </details>
 
         <details class="faq__item" data-reveal data-reveal-delay="360">
@@ -809,7 +803,7 @@
   <footer class="footer" id="rodape">
     <div class="footer__divider" aria-hidden="true"></div>
     <div class="footer__inner">
-      <img src="/.netlify/images?url=/assets/perfil-whatsapp-v2-nome.png&w=220&q=80" alt="Instituto Verstehen" class="footer__logo" width="110" height="110" loading="lazy">
+      <img src="assets/apple-touch-180.png" alt="Instituto Verstehen" class="footer__logo" width="110" height="110" loading="lazy">
       <p class="footer__copy">© 2025 Instituto Verstehen. Todos os direitos reservados.</p>
       <p class="footer__note">
         Este produto é distribuído pela plataforma Hotmart. Ao realizar a compra, você concorda com os termos de uso e política de privacidade da plataforma.
@@ -823,6 +817,33 @@
       </nav>
     </div>
   </footer>
+
+  <!-- ═══════════════ MODAL · CAPTURA DE LEAD ═══════════════ -->
+  <div class="lead-modal" id="lead-modal" aria-hidden="true" role="dialog" aria-labelledby="lead-modal-title" aria-modal="true">
+    <div class="lead-modal__backdrop" data-lead-close></div>
+    <div class="lead-modal__card" role="document">
+      <button type="button" class="lead-modal__close" data-lead-close aria-label="Fechar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <h3 class="lead-modal__title" id="lead-modal-title">Falta pouco. Vamos te enviar o acesso.</h3>
+      <p class="lead-modal__sub">Preencha seus dados e siga para o pagamento seguro.</p>
+      <form class="lead-form" id="lead-form" novalidate>
+        <label class="lead-form__field">
+          <span>Seu nome</span>
+          <input type="text" name="nome" required autocomplete="name" placeholder="Como podemos te chamar?" maxlength="80">
+        </label>
+        <label class="lead-form__field">
+          <span>Seu WhatsApp</span>
+          <input type="tel" name="telefone" required autocomplete="tel" placeholder="(11) 99999-9999" inputmode="tel" maxlength="16">
+        </label>
+        <button type="submit" class="lead-form__submit">
+          <span class="lead-form__submit-text">Continuar para o pagamento</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <p class="lead-form__micro">🔒 Compra protegida pela Hotmart · Garantia de 7 dias</p>
+      </form>
+    </div>
+  </div>
 
   <script src="script.js" defer></script>
 </body>
