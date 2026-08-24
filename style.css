@@ -2263,3 +2263,39 @@ body.lead-modal-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .offer__cta--final, .offer__kicker.is-visible { animation: none; }
 }
+
+
+/* ================================================================
+   PERFORMANCE · content-visibility nas dobras abaixo do fold
+   (hero e estatísticas ficam fora: podem aparecer no 1º viewport).
+   Alturas medidas na página real; "auto" guarda o tamanho após o
+   primeiro render, então o valor só importa antes de rolar.
+   ================================================================ */
+#dor, #solucao, #passos, #stack, #para-quem-e, #ledger, #oferta,
+#contraste, #autoridade, #oferta-final, #faq {
+  content-visibility: auto;
+}
+#dor          { contain-intrinsic-size: auto 1000px auto 1233px; }
+#solucao      { contain-intrinsic-size: auto 1000px auto 864px; }
+#passos       { contain-intrinsic-size: auto 1000px auto 1251px; }
+#stack        { contain-intrinsic-size: auto 1000px auto 2966px; }
+#para-quem-e  { contain-intrinsic-size: auto 1000px auto 1312px; }
+#ledger       { contain-intrinsic-size: auto 1000px auto 1081px; }
+#oferta       { contain-intrinsic-size: auto 1000px auto 802px; }
+#contraste    { contain-intrinsic-size: auto 1000px auto 1296px; }
+#autoridade   { contain-intrinsic-size: auto 1000px auto 1636px; }
+#oferta-final { contain-intrinsic-size: auto 1000px auto 646px; }
+#faq          { contain-intrinsic-size: auto 1000px auto 1058px; }
+@media (min-width: 900px) {
+  #dor          { contain-intrinsic-size: auto 1000px auto 1336px; }
+  #solucao      { contain-intrinsic-size: auto 1000px auto 1225px; }
+  #passos       { contain-intrinsic-size: auto 1000px auto 1092px; }
+  #stack        { contain-intrinsic-size: auto 1000px auto 2119px; }
+  #para-quem-e  { contain-intrinsic-size: auto 1000px auto 1026px; }
+  #ledger       { contain-intrinsic-size: auto 1000px auto 1340px; }
+  #oferta       { contain-intrinsic-size: auto 1000px auto 760px; }
+  #contraste    { contain-intrinsic-size: auto 1000px auto 890px; }
+  #autoridade   { contain-intrinsic-size: auto 1000px auto 1112px; }
+  #oferta-final { contain-intrinsic-size: auto 1000px auto 827px; }
+  #faq          { contain-intrinsic-size: auto 1000px auto 1093px; }
+}
