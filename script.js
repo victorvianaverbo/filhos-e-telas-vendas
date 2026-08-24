@@ -214,7 +214,7 @@
 
   /* URL /exec do Apps Script (leads-planilha.gs) publicado como app da web,
      acesso "Qualquer pessoa". Vazio = não grava, só redireciona. */
-  const WEBHOOK_PLANILHA = '';
+  const WEBHOOK_PLANILHA = 'https://script.google.com/macros/s/AKfycbwMTS8tinHTxF7CQxmpGr9jNdnbrKckBav8wIADU1T4dY1tcsPLkrx_L9T84qx9ne9pZQ/exec';
 
   const modal = document.getElementById('lead-modal');
   const form = document.getElementById('lead-form');
