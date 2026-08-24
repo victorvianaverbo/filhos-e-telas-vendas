@@ -838,7 +838,7 @@ body {
   font-size: .78rem;
   text-transform: uppercase;
   letter-spacing: .25em;
-  color: var(--sage);
+  color: var(--teal-light);
   margin-bottom: var(--space-sm);
   display: block;
 }
@@ -1871,7 +1871,7 @@ body {
   opacity: .95;
 }
 .footer__copy { font-family: var(--font-body); font-weight: 400; font-size: .85rem; color: rgba(197,216,195,.6); }
-.footer__note { font-family: var(--font-body); font-weight: 300; font-size: .78rem; line-height: 1.6; color: rgba(197,216,195,.45); }
+.footer__note { font-family: var(--font-body); font-weight: 300; font-size: .78rem; line-height: 1.6; color: rgba(197,216,195,.72); }
 
 .footer__links { margin-top: 1rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; }
 .footer__links a {
